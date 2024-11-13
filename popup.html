@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etsy to WooCommerce</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <h2>Etsy Ürün Bilgilerini Çek</h2>
+
+  <button id="fetchData">Verileri Çek</button>
+
+  <h3>Ürün Bilgileri</h3>
+  <input type="text" id="productTitle" placeholder="Ürün Başlığı">
+  <input type="text" id="productPrice" placeholder="Fiyat">
+  <textarea id="productDescription" placeholder="Ürün Açıklaması"></textarea>
+  <textarea id="productImages" placeholder="Görseller (URL olarak virgülle ayırın)"></textarea>
+  <textarea id="productOptions" placeholder="Varyantlar (virgülle ayırın)"></textarea>
+
+  <button id="sendData">Verileri Gönder</button>
+
+  <!-- Geliştirici Bilgisi ve LinkedIn İkonu -->
+  <div id="developerInfo">
+    Development by: İsmail Karaca
+    <a href="https://www.linkedin.com/in/i-karaca/" target="_blank" id="linkedinIcon">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
