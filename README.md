@@ -44,7 +44,7 @@ This Chrome extension uses the WooCommerce REST API to send product information 
      ```
 
 Your extension is now set up to connect to the WooCommerce API and transfer product information to the specified WooCommerce store.
-
+---
 #### 1. General Structure and Functionality
 
 The extension enables users to extract product data from an active Etsy product page and submit it to WooCommerce via an API. User interaction is facilitated through a popup interface, while data processing is managed by `content.js`, `background.js`, and utility files located in the `utils` directory. 
