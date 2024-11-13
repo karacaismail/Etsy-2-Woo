@@ -1,6 +1,6 @@
 async function postToWooCommerce(productData) {
-  const apiUrl = "https://artogio.com/wp-json/wc/v3/products";
-  const auth = btoa("ck_3de512b0e8fa4b56389b125df6c396b1f4fa5e3e:cs_df8b52c63fb0d6b0ce92b660fc6fc166a9a5c5d4");
+  const apiUrl = "https://your-woocommerce-website.com/wp-json/wc/v3/products";
+  const auth = btoa("ck_Consumer_Key_Here:cs_Consumer_Secret_Here");
 
   const response = await fetch(apiUrl, {
     method: "POST",
@@ -27,3 +27,6 @@ async function postToWooCommerce(productData) {
 }
 
 export default postToWooCommerce;
+
+
+ 
