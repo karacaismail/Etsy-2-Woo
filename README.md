@@ -1,7 +1,7 @@
 # Etsy-2-Woo
-Etsy product to WooCommerce product Chrome Extension
+Copy Etsy Product to WooCommerce via Chrome Extension
 
-### Etsy to WooCommerce Chrome Extension – Technical Documentation
+### Etsy Product to WooCommerce Transfer Chrome Extension – Technical Documentation
 
 This document details the technical structure, file organisation, and function of a Chrome extension that transfers product data from Etsy to WooCommerce. The extension scrapes product information from Etsy and submits it to WooCommerce, employing a modular and reusable function structure. The documentation aims to clarify the code's operation from a developer’s perspective.
 
