@@ -5,6 +5,46 @@ Copy Etsy Product to WooCommerce via Chrome Extension
 
 This document details the technical structure, file organisation, and function of a Chrome extension that transfers product data from Etsy to WooCommerce. The extension scrapes product information from Etsy and submits it to WooCommerce, employing a modular and reusable function structure. The documentation aims to clarify the code's operation from a developer’s perspective.
 
+### Adding WooCommerce API Key and Secret
+
+This Chrome extension uses the WooCommerce REST API to send product information to WooCommerce. To enable access to your WooCommerce store, you'll need to add your API keys to the extension. Follow the steps below to enter your API Key and Secret.
+
+1. **Obtain API Keys from WooCommerce:**
+   - Go to your WooCommerce admin dashboard.
+   - Navigate to **WooCommerce > Settings > Advanced > REST API**.
+   - Select **Add Key** to generate your API keys.
+   - Set **Permissions** to **Read/Write**.
+   - Click **Generate API Key**. This will provide you with two keys:
+     - **Consumer Key** (e.g., `ck_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`)
+     - **Consumer Secret** (e.g., `cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`)
+
+2. **Add API Keys to the Code:**
+   - Open the relevant file, such as `background.js` or `apiHandler.js`, and locate the following line:
+
+     ```javascript
+     const auth = btoa("ck_Consumer_Key_Here:cs_Consumer_Secret_Here");
+     ```
+
+   - Replace `ck_Consumer_Key_Here` and `cs_Consumer_Secret_Here` with your **Consumer Key** and **Consumer Secret**. For example:
+
+     ```javascript
+     const auth = btoa("ck_your_consumer_key:cs_your_consumer_secret");
+     ```
+
+3. **Security Note:**
+   - Storing these keys directly in the code can pose a security risk. If possible, consider storing them in a secure `.env` file and referencing them in your code.
+
+4. **Set Up the Authentication Header:**
+   - The `auth` variable is then used in the `Authorization` header for API requests:
+
+     ```javascript
+     headers: {
+       "Authorization": "Basic " + auth
+     }
+     ```
+
+Your extension is now set up to connect to the WooCommerce API and transfer product information to the specified WooCommerce store.
+
 #### 1. General Structure and Functionality
 
 The extension enables users to extract product data from an active Etsy product page and submit it to WooCommerce via an API. User interaction is facilitated through a popup interface, while data processing is managed by `content.js`, `background.js`, and utility files located in the `utils` directory. 
