@@ -1,3 +1,5 @@
+// content.js
+
 function extractProductData() {
   console.log("Ürün verisi çekme işlemi başlatıldı");
 
@@ -10,7 +12,7 @@ function extractProductData() {
     // Ürün fiyatını al ve formatla
     const priceElement = document.querySelector('div[data-selector="price-only"] p');
     let price = priceElement ? priceElement.innerText : "Fiyat bulunamadı";
-    price = price.split('.')[0].replace(/[^\d]/g, '');  // Nokta öncesi tamsayıyı al
+    price = price.replace(/[^0-9,.]/g, '').replace(',', '.'); // Fiyatı uygun formata çevir
     console.log("Formatlanmış ürün fiyatı:", price);
 
     // Ürün açıklamasını al
@@ -18,19 +20,21 @@ function extractProductData() {
     const description = descriptionElement ? descriptionElement.innerText : "Açıklama bulunamadı";
     console.log("Ürün açıklaması:", description);
 
-    // Ürün görsellerini al
-    const imageElements = document.querySelectorAll('ul.carousel-pane-list img');
-    const images = imageElements.length > 0 ? Array.from(imageElements).map(img => img.src) : ["Görseller bulunamadı"];
-    console.log("Ürün görselleri:", images);
+    // Ürün görselleri ve videolarını al
+    const allMediaElements = document.querySelectorAll('img, video, source');
+    const mediaUrls = Array.from(allMediaElements)
+      .map(el => el.src)
+      .filter(src => src && (src.endsWith('.jpg') || src.endsWith('.jpeg') || src.endsWith('.png') || src.endsWith('.mp4')));
+    console.log("Ürün medya dosyaları:", mediaUrls);
 
     // Ürün varyant seçeneklerini al
-    const optionElements = document.querySelectorAll('#variation-selector-0 option');
+    const optionElements = document.querySelectorAll('[id^="variation-selector"] option');
     const options = optionElements.length > 1 ? Array.from(optionElements)
       .map(option => option.innerText)
       .filter(option => option !== 'Select an option') : ["Varyant seçenekleri bulunamadı"];
     console.log("Varyant seçenekleri:", options);
 
-    return { title, price, description, images, options };
+    return { title, price, description, images: mediaUrls, options };
   } catch (error) {
     console.error("Veri çekme hatası:", error.message);
     return null;

@@ -2,7 +2,16 @@
   "manifest_version": 3,
   "name": "Etsy 2 WooCommerce",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://artogio.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -15,5 +24,10 @@
       "matches": ["https://www.etsy.com/listing/*"],
       "js": ["content/content.js"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
 }

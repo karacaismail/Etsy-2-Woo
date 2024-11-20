@@ -1,86 +1,230 @@
 /* Genel Stiller */
 body {
-  background-color: #333;
+  background-color: #2d2d2d;
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   padding: 20px;
   margin: 0;
-  min-width: 400px;
-  min-height: 550px; /* Panel yüksekliğini artırmak için eklendi */
+  min-width: 500px;
+  min-height: 750px; /* Minimum yüksekliği +100 px artırıldı */
 }
 
-/* Container */
-#container {
-  width: 350px;
-  margin: 0 auto;
+/* Tab Butonları */
+#tabContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #444;
+}
+
+.tabButton {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 15px 30px; /* Daha geniş ve belirgin buton boyutu */
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease, transform 0.2s ease;
+}
+
+.tabButton:hover {
+  background-color: #3c6e71;
+  color: #ffffff;
+  transform: translateY(-2px); /* Kullanıcı etkileşiminde belirgin hale getirildi */
+}
+
+.tabButton.active {
+  background-color: #1B5E20;
+  color: #fff;
+  border-bottom: 3px solid #ffffff;
+  transform: scale(1.05); /* Aktif olan sekmeyi daha belirgin hale getirdik */
+}
+
+/* Tab İçerikleri */
+.tabContent {
+  display: none;
+}
+
+.tabContent.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Form Elemanları */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  margin-left: 5%;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #ccc;
+}
+
 input, textarea {
-  width: 90%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #444;
+  width: 95%;
+  padding: 15px; /* Kullanıcı odaklı daha büyük girdi alanı */
+  background-color: #3a3a3a;
   color: #fff;
-  border: 1px solid #666;
-  border-radius: 4px;
+  border: 1px solid #5c5c5c;
+  border-radius: 6px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 10px #00c853;
+  transform: scale(1.05); /* Odaklandığında daha belirgin */
+}
+
+/* Disabled Durumu */
+input:disabled, textarea:disabled {
+  background-color: #555;
+  color: #aaa;
+}
+
+/* fieldset ve legend Stilleri */
+fieldset {
+  border: 2px solid #444;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #333;
+}
+
+legend {
+  font-weight: bold;
+  color: #ffffff;
+  padding: 0 10px;
 }
 
 /* Buton Stilleri */
 button {
-  padding: 10px 20px;
-  margin: 5px;
+  padding: 15px 30px;
+  margin: 15px;
   background-color: #ffffff;
   color: #1A237E;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover Durumu */
 button:hover {
-  background-color: #1B5E20;
+  background-color: #3c6e71;
   color: #ffffff;
+  transform: translateY(-3px); /* Hover durumunda hafifçe yukarı kalkar */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Hover'da gölge eklendi */
 }
 
-/* Active Durumu */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 8px #1A237E;
+}
+
 button:active {
   background-color: #388E3C;
   color: #ffffff;
-  transform: scale(1.05); /* Hafif büyütme efekti */
+  transform: scale(1.1);
   box-shadow: 0 4px 6px rgba(0, 255, 0, 0.3), inset 0 0 3px #00C853;
+}
+
+button:disabled {
+  background-color: #777;
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7; /* Disabled durumda görsel olarak daha az belirgin */
 }
 
 /* Status Mesajı */
 #status {
-  margin-top: 15px;
-  font-size: 0.9em;
+  margin-top: 20px;
+  font-size: 1em;
   color: #ccc;
-}
-
-/* Geliştirici Bilgisi */
-#developerInfo {
-  position: fixed;
-  right: 24px;
-  bottom: 12px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1.1em;
-  color: #ccc;
-  display: flex;
-  align-items: center;
-  margin-top: 24px; /* Üst boşluk */
-  margin-bottom: 20px; /* Alt boşluk */
+  text-align: left;
 }
 
 /* LinkedIn İkonu */
 #linkedinIcon {
-  color: #0077b5; /* LinkedIn mavisi */
-  margin-left: 5px;
-  transition: color 0.3s ease;
+  color: #0077b5;
+  margin-left: 10px;
+  font-size: 1.5em; /* Daha büyük ikon UX açısından daha belirgin */
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 #linkedinIcon:hover {
   color: #ffffff;
+  transform: rotate(15deg) scale(1.2); /* Hover durumunda belirgin hareket ve büyütme */
+}
+
+/* Geri Bildirim Konteyneri */
+#feedbackContainer {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Başarı Geri Bildirimi Stili */
+#feedbackContainer.success {
+  background-color: #388E3C; /* Başarı durumda yeşil arka plan */
+  color: #ffffff; /* Başarı durumunda beyaz yazı */
+  border: 2px solid #2e7d32; /* Başarı durumunda daha koyu bir yeşil sınır */
+}
+
+/* Hata Geri Bildirimi Stili */
+#feedbackContainer.error {
+  background-color: #D32F2F; /* Hata durumunda kırmızı arka plan */
+  color: #ffffff; /* Hata durumunda beyaz yazı */
+  border: 2px solid #b71c1c; /* Hata durumunda daha koyu bir kırmızı sınır */
+}
+
+/* Loading Spinner */
+#loadingSpinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #1A237E; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto; /* Ortalanmış konum */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* Geliştirici Bilgisi */
+#developerInfo {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.1em;
+  color: #ccc;
+  display: flex; /* Bu satır eklendi */
+  align-items: center;
+  background-color: #444;
+  margin-top: 24px;
+  padding: 5px; /* Güncellendi */
+  border-radius: 5px; /* Güncellendi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Arka plan gölgesi eklendi */
 }

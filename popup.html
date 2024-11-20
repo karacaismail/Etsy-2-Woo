@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,103 @@
   <link rel="stylesheet" href="popup.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-  <h2>Etsy Ürün Bilgilerini Çek</h2>
+  <!-- Sekme Butonları -->
+  <div id="tabContainer">
+    <button class="tabButton active" id="productTabButton" aria-controls="productTab"><i class="fas fa-box-open"></i> Ürün Bilgileri</button>
+    <button class="tabButton" id="settingsTabButton" aria-controls="settingsTab"><i class="fas fa-cog"></i> Ayarlar</button>
+  </div>
 
-  <button id="fetchData">Verileri Çek</button>
+  <!-- Ürün Bilgileri Sekmesi -->
+  <div class="tabContent active" id="productTab">
+    <p>WooCommerce mağazanıza eklemek istediğiniz Etsy ürünlerini kolayca buradan çekin ve düzenleyin.</p>
 
-  <h3>Ürün Bilgileri</h3>
-  <input type="text" id="productTitle" placeholder="Ürün Başlığı">
-  <input type="text" id="productPrice" placeholder="Fiyat">
-  <textarea id="productDescription" placeholder="Ürün Açıklaması"></textarea>
-  <textarea id="productImages" placeholder="Görseller (URL olarak virgülle ayırın)"></textarea>
-  <textarea id="productOptions" placeholder="Varyantlar (virgülle ayırın)"></textarea>
+    <button id="fetchData" title="Etsy'den ürün bilgilerini çekin"><i class="fas fa-sync-alt"></i> Verileri Çek</button>
 
-  <button id="sendData">Verileri Gönder</button>
+    <!-- Ürün Formu -->
+    <fieldset>
+      <legend>Ürün Bilgilerini Doldurun</legend>
+      <div class="form-group">
+        <label for="productTitle">Ürün Başlığı:</label>
+        <input type="text" id="productTitle" placeholder="Örnek: Ahşap Organizer" aria-describedby="productTitleHelp">
+        <small id="productTitleHelp">Ürünün ismi, müşterilere gösterilecek başlıktır.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="productPrice">Fiyat:</label>
+        <input type="number" id="productPrice" placeholder="Örnek: 150" aria-describedby="productPriceHelp">
+        <small id="productPriceHelp">Ürünün satış fiyatı (örn. 150 TL).</small>
+      </div>
+
+      <div class="form-group">
+        <label for="productDescription">Ürün Açıklaması:</label>
+        <textarea id="productDescription" placeholder="Ürün açıklaması girin..." aria-describedby="productDescriptionHelp"></textarea>
+        <small id="productDescriptionHelp">Müşterilere ürünü anlatan detaylı bir açıklama yazın.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="productImages">Görseller:</label>
+        <textarea id="productImages" placeholder="Görsel URL'leri (virgülle ayırın)" aria-describedby="productImagesHelp"></textarea>
+        <small id="productImagesHelp">Ürün görselleri için URL'leri virgülle ayırarak girin.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="productOptions">Varyantlar:</label>
+        <textarea id="productOptions" placeholder="Varyantlar (virgülle ayırın)" aria-describedby="productOptionsHelp"></textarea>
+        <small id="productOptionsHelp">Eğer ürünün farklı varyantları (örneğin renk, boyut) varsa bu alanı doldurun.</small>
+      </div>
+    </fieldset>
+
+    <button id="sendData" title="Ürün verilerini WooCommerce'e gönderin"><i class="fas fa-paper-plane"></i> Verileri Gönder</button>
+
+    <!-- Yükleme Animasyonu İçin -->
+    <div id="loadingSpinner" class="hidden"></div> <!-- Yükleme animasyonu göstermek için -->
+
+    <!-- Geri Bildirim Mesajı Göstermek İçin -->
+    <div id="feedbackContainer" style="margin-top: 10px; font-weight: bold;"></div>
+  </div>
+
+  <!-- Ayarlar Sekmesi -->
+  <div class="tabContent" id="settingsTab">
+    <h2><i class="fas fa-cog"></i> WooCommerce Ayarları</h2>
+    <p>WooCommerce mağazanız için gerekli bilgileri girin.</p>
+
+    <fieldset>
+      <legend>WooCommerce Ayarlarını Girin</legend>
+
+      <div class="form-group">
+        <label for="wooCommerceUrl">WooCommerce URL:</label>
+        <input type="url" id="wooCommerceUrl" placeholder="Örnek: https://artogio.com" aria-describedby="wooCommerceUrlHelp">
+        <small id="wooCommerceUrlHelp">Mağazanızın WooCommerce URL'sini girin.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="wooApiKey">WooCommerce API Key:</label>
+        <input type="password" id="wooApiKey" placeholder="WooCommerce API Anahtarı" aria-describedby="wooApiKeyHelp">
+        <small id="wooApiKeyHelp">API anahtarınız WooCommerce mağazanıza bağlantı sağlamak için kullanılır.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="wooApiSecret">WooCommerce API Secret:</label>
+        <input type="password" id="wooApiSecret" placeholder="WooCommerce API Secret" aria-describedby="wooApiSecretHelp">
+        <small id="wooApiSecretHelp">API secret anahtarınızı güvenli bir şekilde girin.</small>
+      </div>
+    </fieldset>
+
+    <button id="saveSettings" title="WooCommerce ayarlarını kaydedin"><i class="fas fa-save"></i> Ayarları Kaydet</button>
+  </div>
 
   <!-- Geliştirici Bilgisi ve LinkedIn İkonu -->
   <div id="developerInfo">
-    Development by: İsmail Karaca
-    <a href="https://www.linkedin.com/in/i-karaca/" target="_blank" id="linkedinIcon">
+    <p>Development by: <strong>İsmail Karaca</strong></p>
+    <a href="https://www.linkedin.com/in/i-karaca/" target="_blank" id="linkedinIcon" aria-label="LinkedIn Profile - İsmail Karaca">
       <i class="fab fa-linkedin"></i>
     </a>
   </div>
 
+
   <script src="popup.js"></script>
 </body>
+
 </html>
